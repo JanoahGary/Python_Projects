@@ -1,0 +1,3 @@
+import GuessingGameFunctions
+
+GuessingGameFunctions.displayMenu()
