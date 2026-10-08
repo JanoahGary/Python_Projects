@@ -52,14 +52,23 @@ def displayMenu():
 
 def playGame(numOfAttempts, targetRange):
     targetNumber = random.randint(*targetRange)
+    wonGame = False
     while numOfAttempts > 0:
-        userGuess = int(input("Enter Your Guess: "))
-        if userGuess == targetNumber:
-            print("You Won! Good Job!")
-        elif userGuess != targetNumber and userGuess > targetNumber:
-            print("Incorrect Number Guessed\nNumber Is Lower")
-            numOfAttempts -= 1
-        elif userGuess != targetNumber and userGuess < targetNumber:
-            print("Incorrect Number Guessed\nNumber Is Higher")
-            numOfAttempts -= 1
-    print(f"\nGame Over! {targetNumber} Was The Correct Number")
+        try:
+            userGuess = int(input("Enter Your Guess: "))
+            if userGuess == targetNumber:
+                print("You Won! Good Job!")
+                wonGame = True
+                break
+            elif userGuess != targetNumber and userGuess > targetNumber:
+                print("Incorrect Number Guessed\nNumber Is Lower")
+                numOfAttempts -= 1
+            elif userGuess != targetNumber and userGuess < targetNumber:
+                print("Incorrect Number Guessed\nNumber Is Higher")
+                numOfAttempts -= 1
+        except ValueError:
+            print("Invalid Input, Please Enter An Integer!")
+    if wonGame:
+        print(f"\nYou Win! {targetNumber} Was The Correct Number!")
+    else:
+        print(f"\nGame Over! {targetNumber} Was The Correct Number.")
