@@ -12,8 +12,32 @@ def setDifficulty():
         case _: 
             print("Invalid Difficulty Selected!")
 
-def isWin():
-    userChoice = input("Enter Your Choice (Rock/Paper/Scissors)")
+def isWin(userChoice, computerChoice):
     match userChoice:
         case "Rock":
-            0
+            if computerChoice == "Paper":
+                return False
+            elif computerChoice == "Scissors":
+                return True
+            else:
+                print("There Was A Tie, Enter Another Choice")
+                return None
+        case "Scissors":
+            if computerChoice == "Rock":
+                return False
+            elif computerChoice == "Paper":
+                return True
+            else:
+                print("There Was A Tie, Enter Another Choice")
+                return None
+        case "Paper": 
+            if computerChoice == "Scissors":
+                return False
+            elif computerChoice == "Rock":
+                return True
+            else:
+                print("There Was A Tie, Enter Another Choice")
+                return None
+
+def playGame():
+    return 0

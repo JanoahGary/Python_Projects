@@ -21,17 +21,17 @@ def setDifficulty():
 
 #Display The Rules To Player
 def displayRules():
-    userChoice = int(input("Which Game Rules Do You Wish To View?\n1. Guessing Game\n2. Rock Paper Scissors\n3. Hang Man"))
+    userChoice = (input("Which Game Rules Do You Wish To View?\n1. Guessing Game\n2. Rock Paper Scissors\n3. Hang Man\nEnter Your Choice: "))
     match userChoice:
-        case 1:
+        case "1":
             print("The Goal Of The Game Is To Correctly Guess A Random Number In A Certain Range\n" \
             "The Range Of The Target Number Will Depend On Your Selected Difficulty\n" \
             "Your Number Of Attempts Will Stay The Same Regardless Of Difficulty\n")
-        case 2:
+        case "2":
             print("The Goal Of The Game Is To Correctly Choose The Winning Play Against The Algorithm\n" \
             "The Algorithm Chooses Its Hand Before You Choose Yours, Making The Game Fair\n" \
             "The Algorithm Will Play According To Common Patterns Found In Rock Paper Scissors\n")
-        case 3:
+        case "3":
             print("The Goal Of The Game Is To Correctly Guess The Word From The Chosen Category\n" \
             "The Length Of The Word Will Depend On Your Selected Difficulty\n" \
             "Your Number Of Attempts Will Scale With Difficulty\n")
