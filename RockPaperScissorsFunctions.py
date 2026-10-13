@@ -1,4 +1,4 @@
-import random
+import random 
 
 def setDifficulty():
     userDifficulty = input("Enter Difficulty Level (Easy/Medium/Hard): ")
@@ -38,6 +38,20 @@ def isWin(userChoice, computerChoice):
             else:
                 print("There Was A Tie, Enter Another Choice")
                 return None
+        case _:
+            print("Invalid Choice")
+
+def easyComputer():
+    choices = ["Paper", "Scissors", "Rock"]
+    return choices[random.randint(0, 2)]
+def  mediumComputer():
+    choices = ["Paper", "Scissors", "Rock"]
+    return 0
+def hardComputer():
+    choices = ["Paper", "Scissors", "Rock"]
+    return 0
+
+
 
 def playGame():
-    return 0
+    userChoice = input("Enter Your Choice")

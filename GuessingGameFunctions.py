@@ -21,34 +21,38 @@ def setDifficulty():
 
 #Display The Rules To Player
 def displayRules():
-    userChoice = (input("Which Game Rules Do You Wish To View?\n1. Guessing Game\n2. Rock Paper Scissors\n3. Hang Man\nEnter Your Choice: "))
-    match userChoice:
-        case "1":
-            print("The Goal Of The Game Is To Correctly Guess A Random Number In A Certain Range\n" \
-            "The Range Of The Target Number Will Depend On Your Selected Difficulty\n" \
-            "Your Number Of Attempts Will Stay The Same Regardless Of Difficulty\n")
-        case "2":
-            print("The Goal Of The Game Is To Correctly Choose The Winning Play Against The Algorithm\n" \
-            "The Algorithm Chooses Its Hand Before You Choose Yours, Making The Game Fair\n" \
-            "The Algorithm Will Play According To Common Patterns Found In Rock Paper Scissors\n")
-        case "3":
-            print("The Goal Of The Game Is To Correctly Guess The Word From The Chosen Category\n" \
-            "The Length Of The Word Will Depend On Your Selected Difficulty\n" \
-            "Your Number Of Attempts Will Scale With Difficulty\n")
-        case _:
-            print("Invalid Game Choice")
+    while True:
+        userChoice = (input("Which Game Rules Do You Wish To View?\n1. Guessing Game\n2. Rock Paper Scissors\n3. Hang Man\nEnter Your Choice: "))
+        match userChoice:
+            case "1":
+                print("\nThe Goal Of The Game Is To Correctly Guess A Random Number In A Certain Range\n" \
+                "The Range Of The Target Number Will Depend On Your Selected Difficulty\n" \
+                "Your Number Of Attempts Will Stay The Same Regardless Of Difficulty\n")
+            case "2":
+                print("\nThe Goal Of The Game Is To Correctly Choose The Winning Play Against The Algorithm\n" \
+                "The Algorithm Chooses Its Hand Before You Choose Yours, Making The Game Fair\n" \
+                "The Algorithm Will Play According To Common Patterns Found In Rock Paper Scissors\n")
+            case "3":
+                print("\nThe Goal Of The Game Is To Correctly Guess The Word From The Chosen Category\n" \
+                "The Length Of The Word Will Depend On Your Selected Difficulty\n" \
+                "Your Number Of Attempts Will Scale With Difficulty\n")
+            case _:
+                print("\nInvalid Game Choice")
 
 #Display The Game Menu To User
 def displayMenu():
-    print("Welcome To Games.py!\n1. Play Games\n2. Review Rules\n")
-    userChoice = input("Enter Your Choice: ")
-    match userChoice:
-        case "1":
-            setDifficulty()
-        case "2":
-            displayRules()
-        case _:
-            print("Invalid Choice")
+    while True:
+        print("Welcome To Games.py!\n1. Play Games\n2. Review Rules\n3. Exit\n")
+        userChoice = input("Enter Your Choice: ")
+        match userChoice:
+            case "1":
+                setDifficulty()
+            case "2":
+                displayRules()
+            case "3":
+                break
+            case _:
+                print("Invalid Choice")
 
 def playGame(numOfAttempts, targetRange):
     targetNumber = random.randint(*targetRange)
