@@ -39,21 +39,6 @@ def displayRules():
             case _:
                 print("\nInvalid Game Choice")
 
-#Display The Game Menu To User
-def displayMenu():
-    while True:
-        print("Welcome To Games.py!\n1. Play Games\n2. Review Rules\n3. Exit\n")
-        userChoice = input("Enter Your Choice: ")
-        match userChoice:
-            case "1":
-                setDifficulty()
-            case "2":
-                displayRules()
-            case "3":
-                break
-            case _:
-                print("Invalid Choice")
-
 def playGame(numOfAttempts, targetRange):
     targetNumber = random.randint(*targetRange)
     wonGame = False

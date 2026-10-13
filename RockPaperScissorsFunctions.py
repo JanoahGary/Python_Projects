@@ -1,18 +1,6 @@
 from collections import Counter
 import random 
 
-def playGames():
-    userDifficulty = input("Enter Difficulty Level (Easy/Medium/Hard): ")
-    match userDifficulty:
-        case "Easy":
-            0
-        case "Medium":
-            0
-        case "Hard":
-            0
-        case _: 
-            print("Invalid Difficulty Selected!")
-
 def isWin(userChoice, computerChoice):
     match userChoice:
         case "Rock":
@@ -21,7 +9,6 @@ def isWin(userChoice, computerChoice):
             elif computerChoice == "Scissors":
                 return True
             else:
-                print("There Was A Tie")
                 return None
         case "Scissors":
             if computerChoice == "Rock":
@@ -29,7 +16,6 @@ def isWin(userChoice, computerChoice):
             elif computerChoice == "Paper":
                 return True
             else:
-                print("There Was A Tie")
                 return None
         case "Paper": 
             if computerChoice == "Scissors":
@@ -37,7 +23,6 @@ def isWin(userChoice, computerChoice):
             elif computerChoice == "Rock":
                 return True
             else:
-                print("There Was A Tie, Enter Another Choice")
                 return None
         case _:
             print("Invalid Choice")
@@ -45,40 +30,64 @@ def isWin(userChoice, computerChoice):
 counters = {"Rock": "Paper", "Paper": "Scissors", "Scissors": "Rock"}
 
 
-def easyComputer():
+def easyComputer(userMoverHistory):
     choices = ["Paper", "Scissors", "Rock"]
-    return random.choices(choices)
+    return choices[random.randint(0,2)]
 
 def mediumComputer(userMoveHistory):
-    return counters[Counter(userMoveHistory).most_common(1)[0][0]]
+    choices = ["Paper", "Scissors", "Rock"]
+    if not userMoveHistory:
+        return choices[random.randint(0,2)]
+    weights = {
+    "Rock": 0,
+    "Paper": 0,
+    "Scissors": 0
+    }
+    for index, move in enumerate(userMoveHistory):
+        weights[move] += index + 1
+    highestWeight = max(weights.values())
+    tiedMoves = [move for move in weights if weights[move] == highestWeight]
+    if len(tiedMoves) == 1:
+        return counters[tiedMoves[0]]
+    else:
+        for move in reversed(userMoveHistory):
+            if move in tiedMoves:
+                return counters[move]
 
 def hardComputer(userMoveHistory):
     choices = ["Paper", "Scissors", "Rock"]
     h, n = userMoveHistory, 3
-    if len(h) > n:
-        pattern = h[-n:]
+    for n in range(n, 0, -1):
+        if len(h) <= n:
+            continue
+        pattern = h[-n:]    
         for i in range(len(h) - n - 1, -1, -1):
             if h[i:i + n] == pattern:
-                return h[i + n]
-    return random.choice(choices)
+                return counters[h[i + n]]
+    return choices[random.randint(0,2)]
 
 
 
-def playGame(userDifficulty):
+def playGame():
+    userDifficulty = input("Enter Difficulty Level (Easy/Medium/Hard): ")
     userWins = 0
     computerWins = 0
-    if userDifficulty == "Easy":
-        while True:
-            userMoveHistory = []
-            userChoice = input("Enter Your Choice (Enter 1 To Quit):")
-            if userChoice == "1":
-                break
-            userMoveHistory.append(userChoice)
-            computerChoice = easyComputer()
-            if isWin(userChoice, computerChoice) == True:
-                print("You Won This Round")
-                userWins += 1
-            else:
-                print("The Computer Won This Round")
-                computerWins += 1
-            print(f"Score is {userWins} - {computerWins}")
+    userMoveHistory = []
+    while True:
+        difficultiesToComputer = {"Easy": easyComputer, "Medium": mediumComputer, "Hard": hardComputer}            
+        userChoice = input("Enter Your Choice (Enter 1 To Quit): ")
+        if userChoice == "1":
+            break
+        userMoveHistory.append(userChoice)
+        computerChoice = difficultiesToComputer[userDifficulty](userMoveHistory)
+        result = isWin(userChoice, computerChoice)
+        print(f"The Computer Chose: {computerChoice}")
+        if result is True:
+            print("You Won This Round")
+            userWins += 1
+        elif result is False:
+            print("The Computer Won This Round")
+            computerWins += 1
+        else:
+            print("There Was A Tie")
+        print(f"Score is {userWins} - {computerWins}")
